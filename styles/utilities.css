@@ -1,0 +1,5 @@
+.hoverable:hover {
+	color: var(--color-text-accent);
+	border-color: var(--color-text-accent);
+	cursor: pointer;
+}

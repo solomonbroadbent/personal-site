@@ -1,0 +1,77 @@
+#landing-section {
+	display: grid;
+	align-content: center;
+	justify-content: center;
+
+	display: none;
+}
+
+#navigation-section {
+	width: var(--responsive__navigation-section-width);
+
+	--root-vertical-padding: calc(var(--responsive__root-padding) * 2);
+	height: calc(100vh - var(--root-vertical-padding));
+
+	display: grid;
+
+	/*background-color: hsl(231, 23%, 21%);*/
+}
+
+#links {
+	align-self: center;
+}
+
+.link {
+	--link-margin: .75rem;
+	--link-margin--extra-margin: calc(var(--link-margin) * 3);
+
+	font-size: 1.25rem;
+	margin-top: var(--link-margin);
+	margin-bottom: var(--link-margin);
+
+	/* prevents hover from triggering when not over text */
+	width: fit-content;
+}
+
+.link--active {
+	font-family: var(--font-family-accent);
+	color: var(--color-text-light);
+	font-size: 2rem;
+	text-transform: capitalize;
+}
+
+.link--extra-margin-top {
+	margin-top: var(--link-margin--extra-margin);
+}
+
+.link--extra-margin-bottom {
+	margin-bottom: var(--link-margin--extra-margin);
+}
+
+#contact {
+	--contact--font-size: 0.9rem;
+
+	align-self: end;
+}
+
+#contact h1 {
+	font-family: var(--font-family-accent);
+	font-style: normal;
+}
+
+#contact h2 {
+	font-size: var(--contact--font-size);
+}
+
+#contact .button {
+	background-color: transparent;
+	border-style: solid;
+	border-width: 1px;
+	margin-top: var(--contact--font-size);
+	font-size: var(--contact--font-size);
+	padding: 0.1em 1.5em;
+}
+
+#contact .button:not(:last-child) {
+	margin-right: var(--contact--font-size);
+}
