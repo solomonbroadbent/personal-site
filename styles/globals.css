@@ -14,7 +14,7 @@
 
 	--responsive__font-size: 20px;
 	--responsive__root-padding: clamp(10px, 5vmin, 100px);
-	--responsive__navigation-section-width: calc(100vw - var(--responsive__root-padding) * 2);
+	--responsive__root-height: calc(100vh - calc(var(--responsive__root-padding) * 2));
 }
 
 *, *::before, *::after {
@@ -44,14 +44,14 @@ button {
 }
 
 /*@media(min-width: env(--breakpoint-medium)) {*/
-@media(min-width: 768px) {
+@media (min-width: 768px) {
 	:root {
 		--responsive__navigation-section-width: 30vw;
 	}
 }
 
 /*@media(min-width: env(--breakpoint-wide)) {*/
-@media(min-width: 992px) {
+@media (min-width: 992px) {
 	:root {
 	}
 }

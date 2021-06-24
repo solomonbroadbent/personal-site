@@ -1,3 +1,9 @@
+#root {
+	display: grid;
+	grid-row-gap: 2rem;
+	height: var(--responsive__root-height);
+}
+
 #landing-section {
 	display: grid;
 	align-content: center;
@@ -7,27 +13,20 @@
 }
 
 #navigation-section {
-	width: var(--responsive__navigation-section-width);
+	--navigation-section__gap: 0.75rem;
 
-	--root-vertical-padding: calc(var(--responsive__root-padding) * 2);
-	height: calc(100vh - var(--root-vertical-padding));
+	align-self: end;
 
-	display: grid;
-
-	/*background-color: hsl(231, 23%, 21%);*/
-}
-
-#links {
-	align-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--navigation-section__gap);
 }
 
 .link {
-	--link-margin: .75rem;
-	--link-margin--extra-margin: calc(var(--link-margin) * 3);
+	--link-margin--extra-margin: calc(var(--navigation-section__gap) * 2);
 
 	font-size: 1.25rem;
-	margin-top: var(--link-margin);
-	margin-bottom: var(--link-margin);
 
 	/* prevents hover from triggering when not over text */
 	width: fit-content;
