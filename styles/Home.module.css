@@ -9,7 +9,6 @@
 
 #nav {
 	grid-area: nav;
-	background-color: green;
 	align-self: var(--nav__align-self);
 
 	width: var(--nav__width);
@@ -45,12 +44,10 @@
 
 #main {
 	grid-area: main;
-	background-color: red;
 	min-width: 100%;
 }
 
 #footer {
-	background-color: orange;
 	grid-area: footer;
 	--contact--font-size: 0.9rem;
 

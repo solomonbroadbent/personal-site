@@ -65,7 +65,6 @@ button {
 		--root__grid-template-areas: 'nav main' 'footer .';
 		--root__grid-auto-rows: auto min-content;
 
-		/*--responsive__navigation-section-width: 30vw;*/
 		--nav__width: max-content;
 		--nav__flex-direction: column;
 		--nav__align-items: start;
