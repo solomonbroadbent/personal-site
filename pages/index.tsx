@@ -16,24 +16,26 @@ export default function Home() {
 				/>
 				<title>sol</title>
 			</Head>
-			<nav id={styles['navigation-section']}>
+			<nav id={styles.nav}>
 				<h1
-					className={`${styles.link} ${styles['link--extra-margin-bottom']} hoverable`}
+					className={`${styles['nav__link']} ${styles['nav__link--extra-margin-bottom']} hoverable`}
 				>
 					skill set
 				</h1>
-				<h1 className={`${styles.link} ${styles['link--active']}`}>
+				<h1 className={`${styles['nav__link']} ${styles['nav__link--active']}`}>
 					terrain tinker
 				</h1>
-				<h1 className={`${styles.link} hoverable`}>playlistsyn.cr</h1>
-				<h1 className={`${styles.link} hoverable`}>chorus</h1>
-				<h1 className={`${styles.link} hoverable`}>nicholson consulting</h1>
+				<h1 className={`${styles['nav__link']} hoverable`}>playlistsyn.cr</h1>
+				<h1 className={`${styles['nav__link']} hoverable`}>chorus</h1>
+				<h1 className={`${styles['nav__link']} hoverable`}>
+					nicholson consulting
+				</h1>
 				<h1
-					className={`${styles.link} ${styles['link--extra-margin-top']} hoverable`}
+					className={`${styles['nav__link']} ${styles['nav__link--extra-margin-top']} hoverable`}
 				>
 					uni
 				</h1>
-				<h1 className={`${styles.link} hoverable`}>about me</h1>
+				<h1 className={`${styles['nav__link']} hoverable`}>about me</h1>
 			</nav>
 			<footer id={styles.contact}>
 				<h1>Solomon Broadbent</h1>

@@ -17,15 +17,15 @@
 	--root__padding-doubled: calc(var(--root__padding) * 2);
 	--root__height: calc(100vh - var(--root__padding-doubled));
 
-	--navigation-section__width: max(
+	--nav__width: max(
 		calc(var(--breakpoint-narrow) - var(--root__padding-doubled)),
 		calc(100vw - var(--root__padding-doubled))
 	);
-	--navigation-section__flex-direction: row;
-	--navigation-section__align-self: start;
-	--navigation-section__align-items: center;
-	--navigation-section__gap: 0.75rem;
-	--navigation-section__extra-margin: 0;
+	--nav__flex-direction: row;
+	--nav__align-self: start;
+	--nav__align-items: center;
+	--nav__gap: 0.75rem;
+	--nav__extra-margin: 0;
 }
 
 *, *::before, *::after {
@@ -60,10 +60,10 @@ button {
 		--root__font-size: 20px;
 
 		/*--responsive__navigation-section-width: 30vw;*/
-		--navigation-section__flex-direction: column;
-		--navigation-section__align-items: start;
-		--navigation-section__align-self: end;
-		--navigation-section__extra-margin: calc(var(--navigation-section__gap) * 2);
+		--nav__flex-direction: column;
+		--nav__align-items: start;
+		--nav__align-self: end;
+		--nav__extra-margin: calc(var(--nav__gap) * 2);
 	}
 }
 

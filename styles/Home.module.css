@@ -12,38 +12,38 @@
 	display: none;
 }
 
-#navigation-section {
-	align-self: var(--navigation-section__align-self);
+#nav {
+	align-self: var(--nav__align-self);
 
-	width: var(--navigation-section__width);
+	width: var(--nav__width);
 	overflow: hidden;
 
 	display: flex;
-	flex-direction: var(--navigation-section__flex-direction);
-	align-items: var(--navigation-section__align-items);
-	gap: var(--navigation-section__gap);
+	flex-direction: var(--nav__flex-direction);
+	align-items: var(--nav__align-items);
+	gap: var(--nav__gap);
 }
 
-.link {
+.nav__link {
 	font-size: 1.25rem;
 
 	/* prevents hover from triggering when not over text */
 	min-width: max-content;
 }
 
-.link--active {
+.nav__link--active {
 	font-family: var(--font-family-accent);
 	color: var(--color-text-light);
 	font-size: 2rem;
 	text-transform: capitalize;
 }
 
-.link--extra-margin-top {
-	margin-top: var(--navigation-section__extra-margin);
+.nav__link--extra-margin-top {
+	margin-top: var(--nav__extra-margin);
 }
 
-.link--extra-margin-bottom {
-	margin-bottom: var(--navigation-section__extra-margin);
+.nav__link--extra-margin-bottom {
+	margin-bottom: var(--nav__extra-margin);
 }
 
 #contact {
