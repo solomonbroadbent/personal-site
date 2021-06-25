@@ -1,7 +1,7 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
-	height: var(--responsive__root-height);
+	height: var(--root__height);
 }
 
 #landing-section {
@@ -13,23 +13,22 @@
 }
 
 #navigation-section {
-	--navigation-section__gap: 0.75rem;
+	align-self: var(--navigation-section__align-self);
 
-	align-self: end;
+	width: var(--navigation-section__width);
+	overflow: hidden;
 
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: var(--navigation-section__flex-direction);
+	align-items: var(--navigation-section__align-items);
 	gap: var(--navigation-section__gap);
 }
 
 .link {
-	--link-margin--extra-margin: calc(var(--navigation-section__gap) * 2);
-
 	font-size: 1.25rem;
 
 	/* prevents hover from triggering when not over text */
-	width: fit-content;
+	min-width: max-content;
 }
 
 .link--active {
@@ -40,11 +39,11 @@
 }
 
 .link--extra-margin-top {
-	margin-top: var(--link-margin--extra-margin);
+	margin-top: var(--navigation-section__extra-margin);
 }
 
 .link--extra-margin-bottom {
-	margin-bottom: var(--link-margin--extra-margin);
+	margin-bottom: var(--navigation-section__extra-margin);
 }
 
 #contact {

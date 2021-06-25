@@ -12,9 +12,20 @@
 	--breakpoint-medium: 768px;
 	--breakpoint-wide: 992px;
 
-	--responsive__font-size: 20px;
-	--responsive__root-padding: clamp(10px, 5vmin, 100px);
-	--responsive__root-height: calc(100vh - calc(var(--responsive__root-padding) * 2));
+	--root__font-size: 15px;
+	--root__padding: clamp(10px, 5vmin, 100px);
+	--root__padding-doubled: calc(var(--root__padding) * 2);
+	--root__height: calc(100vh - var(--root__padding-doubled));
+
+	--navigation-section__width: max(
+		calc(var(--breakpoint-narrow) - var(--root__padding-doubled)),
+		calc(100vw - var(--root__padding-doubled))
+	);
+	--navigation-section__flex-direction: row;
+	--navigation-section__align-self: start;
+	--navigation-section__align-items: center;
+	--navigation-section__gap: 0.75rem;
+	--navigation-section__extra-margin: 0;
 }
 
 *, *::before, *::after {
@@ -26,7 +37,7 @@
 
 html {
 	box-sizing: border-box;
-	font-size: var(--responsive__font-size);
+	font-size: var(--root__font-size);
 	background-color: var(--color-background);
 
 	font-family: var(--font-family-primary);
@@ -36,7 +47,7 @@ html {
 	min-width: var(--breakpoint-narrow);
 	overflow: scroll;
 
-	padding: var(--responsive__root-padding);
+	padding: var(--root__padding);
 }
 
 button {
@@ -46,7 +57,13 @@ button {
 /*@media(min-width: env(--breakpoint-medium)) {*/
 @media (min-width: 768px) {
 	:root {
-		--responsive__navigation-section-width: 30vw;
+		--root__font-size: 20px;
+
+		/*--responsive__navigation-section-width: 30vw;*/
+		--navigation-section__flex-direction: column;
+		--navigation-section__align-items: start;
+		--navigation-section__align-self: end;
+		--navigation-section__extra-margin: calc(var(--navigation-section__gap) * 2);
 	}
 }
 
