@@ -30,6 +30,9 @@
 	--nav__extra-margin: 0;
 
 	--main__width: calc(100vw - var(--root__padding-doubled));
+	--main__align-self: start;
+	--main__job-information__item__min-width: 250px;
+	--main__job-information__grid-template-columns: 1fr;
 }
 
 *, *::before, *::after {
@@ -72,12 +75,14 @@ button {
 		--nav__extra-margin: calc(var(--nav__gap) * 2);
 
 		--main__width: auto;
-
+		--main__align-self: center;
 	}
 }
 
 /*@media(min-width: env(--breakpoint-wide)) {*/
 @media (min-width: 992px) {
 	:root {
+		/* trying to enforce a maximum on 2 columns. not a very good solution */
+		--main__job-information__grid-template-columns: repeat(2, 1fr);
 	}
 }

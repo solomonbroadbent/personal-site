@@ -37,7 +37,38 @@ export default function Home() {
 				</h1>
 				<h1 className={`${styles['nav__link']} hoverable`}>about me</h1>
 			</nav>
-			<main id={styles.main}></main>
+			<main id={styles.main}>
+				<section className={styles['job-information']}>
+					<article className={styles['job-information__section']}>
+						<Image
+							// className={styles['jobInformation__section__image']}
+							src='/images/terrain-tinker/editor-screenshot.png'
+							alt='placeholder image'
+							width='3584'
+							height='2274'
+						/>
+					</article>
+					<article className={styles['job-information__section']}>
+						blah blah blah this is what i did
+					</article>
+					<article className={styles['job-information__section']}>
+						<ul>
+							<li>vue.js</li>
+							<li>three.js</li>
+							<li>cyrpess</li>
+							<li>laravel</li>
+							<li>rabbit-mq</li>
+							<li>redis</li>
+							<li>mysql</li>
+							<li>docker</li>
+							<li>linux</li>
+						</ul>
+					</article>
+					<article className={styles['job-information__section']}>
+						explanations about what i did using vue etc
+					</article>
+				</section>
+			</main>
 			<footer id={styles.footer}>
 				<h1>Solomon Broadbent</h1>
 				<h2>full stack dev</h2>

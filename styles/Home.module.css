@@ -1,6 +1,7 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
+	grid-column-gap: 2rem;
 	height: var(--root__height);
 	grid-template-areas: var(--root__grid-template-areas);
 	grid-auto-columns: min-content auto;
@@ -44,7 +45,22 @@
 
 #main {
 	grid-area: main;
-	min-width: 100%;
+	align-self: var(--main__align-self);
+	justify-self: center;
+}
+
+.job-information {
+	display: grid;
+	grid-gap: 1.25rem;
+	grid-template-columns: var(--main__job-information__grid-template-columns);
+}
+
+.job-information__section {
+	display: grid;
+	align-content: center;
+}
+
+.job-information__section__image {
 }
 
 #footer {
