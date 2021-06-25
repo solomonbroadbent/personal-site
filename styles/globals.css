@@ -10,12 +10,14 @@
 
 	--breakpoint-narrow: 320px;
 	--breakpoint-medium: 768px;
-	--breakpoint-wide: 992px;
+	--breakpoint-wide: 1024px;
 
 	--root__font-size: 15px;
 	--root__padding: clamp(10px, 5vmin, 100px);
 	--root__padding-doubled: calc(var(--root__padding) * 2);
 	--root__height: calc(100vh - var(--root__padding-doubled));
+	--root__grid-template-areas: 'nav' 'main' 'footer';
+	--root__grid-auto-rows: min-content auto min-content;
 
 	--nav__width: max(
 		calc(var(--breakpoint-narrow) - var(--root__padding-doubled)),
@@ -26,6 +28,8 @@
 	--nav__align-items: center;
 	--nav__gap: 0.75rem;
 	--nav__extra-margin: 0;
+
+	--main__width: calc(100vw - var(--root__padding-doubled));
 }
 
 *, *::before, *::after {
@@ -58,12 +62,18 @@ button {
 @media (min-width: 768px) {
 	:root {
 		--root__font-size: 20px;
+		--root__grid-template-areas: 'nav main' 'footer .';
+		--root__grid-auto-rows: auto min-content;
 
 		/*--responsive__navigation-section-width: 30vw;*/
+		--nav__width: max-content;
 		--nav__flex-direction: column;
 		--nav__align-items: start;
-		--nav__align-self: end;
+		--nav__align-self: center;
 		--nav__extra-margin: calc(var(--nav__gap) * 2);
+
+		--main__width: auto;
+
 	}
 }
 

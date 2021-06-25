@@ -37,7 +37,10 @@ export default function Home() {
 				</h1>
 				<h1 className={`${styles['nav__link']} hoverable`}>about me</h1>
 			</nav>
-			<footer id={styles.contact}>
+			<main id={styles.main}>
+				<h1 className={styles['nav__link--active']}>main</h1>
+			</main>
+			<footer id={styles.footer}>
 				<h1>Solomon Broadbent</h1>
 				<h2>full stack dev</h2>
 				<button
