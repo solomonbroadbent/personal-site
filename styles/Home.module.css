@@ -1,16 +1,41 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
-	grid-column-gap: 2rem;
-	height: var(--root__height);
+	grid-column-gap: 4rem;
 	grid-template-areas: var(--root__grid-template-areas);
 	grid-auto-columns: min-content auto;
 	grid-auto-rows: var(--root__grid-auto-rows);
+
+	/* this min-height is just a guess that works
+		— it should really be the nav + footer height when not mobile */
+	min-height: 625px;
+	height: var(--root__height);
+
+	min-width: var(--breakpoint-narrow);
+	padding: var(--root__padding);
+}
+
+#nav:after {
+	display: var(--nav-underline__display);
+
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 100vw;
+
+	border-bottom: 1px solid;
+	color: var(--color-text-dark);
 }
 
 #nav {
 	grid-area: nav;
 	align-self: var(--nav__align-self);
+	/* always show the nav bar on mobile. really this logic should just happen when mobile.
+		needs a cleanup */
+	top: 0;
+	z-index: 1;
+	background-color: var(--color-background);
+	position: var(--nav__position);
 
 	width: var(--nav__width);
 	overflow: hidden;
@@ -47,6 +72,8 @@
 	grid-area: main;
 	align-self: var(--main__align-self);
 	justify-self: center;
+	max-height: var(--main__max-height);
+	overflow-y: var(--main__overflow-y);
 }
 
 .job-information {
@@ -58,6 +85,10 @@
 .job-information__section {
 	display: grid;
 	align-content: center;
+}
+
+.job-information__section li {
+	list-style-type: none;
 }
 
 .job-information__section__image {

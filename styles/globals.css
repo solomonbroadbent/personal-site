@@ -15,10 +15,11 @@
 	--root__font-size: 15px;
 	--root__padding: clamp(10px, 5vmin, 100px);
 	--root__padding-doubled: calc(var(--root__padding) * 2);
-	--root__height: calc(100vh - var(--root__padding-doubled));
+	--root__height: auto;
 	--root__grid-template-areas: 'nav' 'main' 'footer';
 	--root__grid-auto-rows: min-content auto min-content;
 
+	--nav__position: sticky;
 	--nav__width: max(
 		calc(var(--breakpoint-narrow) - var(--root__padding-doubled)),
 		calc(100vw - var(--root__padding-doubled))
@@ -29,7 +30,11 @@
 	--nav__gap: 0.75rem;
 	--nav__extra-margin: 0;
 
+	--nav-underline__display: block;
+
 	--main__width: calc(100vw - var(--root__padding-doubled));
+	--main__max-height: auto;
+	--main__overflow-y: auto;
 	--main__align-self: start;
 	--main__job-information__item__min-width: 250px;
 	--main__job-information__grid-template-columns: 1fr;
@@ -50,11 +55,6 @@ html {
 	font-family: var(--font-family-primary);
 	color: var(--color-text-dark);
 	border-color: var(--color-text-dark);
-
-	min-width: var(--breakpoint-narrow);
-	overflow: scroll;
-
-	padding: var(--root__padding);
 }
 
 button {
@@ -64,17 +64,23 @@ button {
 /*@media(min-width: env(--breakpoint-medium)) {*/
 @media (min-width: 768px) {
 	:root {
+		--root__height: 100vh;
 		--root__font-size: 20px;
-		--root__grid-template-areas: 'nav main' 'footer .';
-		--root__grid-auto-rows: auto min-content;
+		--root__grid-template-areas: 'nav main' 'footer main';
+		--root__grid-auto-rows: 1fr min-content;
 
+		--nav__position: static;
 		--nav__width: max-content;
 		--nav__flex-direction: column;
 		--nav__align-items: start;
 		--nav__align-self: center;
 		--nav__extra-margin: calc(var(--nav__gap) * 2);
 
+		--nav-underline__display: none;
+
 		--main__width: auto;
+		--main__max-height: 100%;
+		--main__overflow-y: scroll;
 		--main__align-self: center;
 	}
 }

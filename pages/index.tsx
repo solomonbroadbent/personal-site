@@ -49,7 +49,16 @@ export default function Home() {
 						/>
 					</article>
 					<article className={styles['job-information__section']}>
-						blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
+						blah blah blah this is what i did blah blah blah this is what i did
 					</article>
 					<article className={styles['job-information__section']}>
 						<ul>
@@ -65,7 +74,14 @@ export default function Home() {
 						</ul>
 					</article>
 					<article className={styles['job-information__section']}>
-						explanations about what i did using vue etc
+						explanations about what i did using vue etc explanations about what
+						i did using vue etc explanations about what i did using vue etc
+						explanations about what i did using vue etc explanations about what
+						i did using vue etc explanations about what i did using vue etc
+						explanations about what i did using vue etc explanations about what
+						i did using vue etc explanations about what i did using vue etc
+						explanations about what i did using vue etc explanations about what
+						i did using vue etc explanations about what i did using vue etc
 					</article>
 				</section>
 			</main>
