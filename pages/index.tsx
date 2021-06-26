@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
 import { useRef } from 'react';
+import Nav from '../components/Nav';
 
 export default function Home() {
 	// this feels like re-inventing the wheel...
@@ -38,29 +39,7 @@ export default function Home() {
 				/>
 				<title>sol</title>
 			</Head>
-			<nav id={styles.nav}>
-				{sections.map((section) => {
-					// FIXME: additionalClasses fails if there are more than 1
-					const classes = `
-						${styles['nav__link']}
-						${section.additionalClasses}
-						hoverable
-					`;
-					const animatedScrollToSection = () => {
-						section.ref.current.scrollIntoView({ behavior: 'smooth' });
-					};
-
-					return (
-						<h1
-							key={section.urlName}
-							className={classes}
-							onClick={animatedScrollToSection}
-						>
-							{section.urlName}
-						</h1>
-					);
-				})}
-			</nav>
+			<Nav sections={sections} />
 			<main id={styles.main}>
 				{sections.map((section) => {
 					return <Section key={section.urlName} ref={section.ref} />;
