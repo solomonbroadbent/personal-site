@@ -12,19 +12,25 @@ export default function Home() {
 	const sections = [
 		{
 			urlName: 'skill-set',
+			name: 'skill set',
 			ref: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-bottom']],
 		},
-		{ urlName: 'terrain-tinker', ref: useRef() },
-		{ urlName: 'playlistsyncr', ref: useRef() },
-		{ urlName: 'chorus', ref: useRef() },
-		{ urlName: 'nicholson-consulting', ref: useRef() },
+		{ urlName: 'terrain-tinker', name: 'terrain tinker', ref: useRef() },
+		{ urlName: 'playlistsyncr', name: 'playlistsyn.cr', ref: useRef() },
+		{ urlName: 'chorus', name: 'chorus', ref: useRef() },
+		{
+			urlName: 'nicholson-consulting',
+			name: 'nicholson consulting',
+			ref: useRef(),
+		},
 		{
 			urlName: 'uni',
+			name: 'uni',
 			ref: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-top']],
 		},
-		{ urlName: 'about-me', ref: useRef() },
+		{ urlName: 'about-me', name: 'about me', ref: useRef() },
 	];
 
 	return (
@@ -42,7 +48,7 @@ export default function Home() {
 			</Head>
 			<Nav sections={sections} />
 			<main id={styles.main}>
-				{sections.map((section) => {
+				{sections.map(section => {
 					return <Section key={section.urlName} ref={section.ref} />;
 				})}
 			</main>

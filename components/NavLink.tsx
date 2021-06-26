@@ -1,8 +1,9 @@
 import styles from '../styles/Home.module.css';
 
-export default function NavLink({ section }) {
+export default function NavLink({ section, active, onClick }) {
 	// FIXME: additionalClasses fails if there are more than 1
 	const classes = `
+						${active ? styles['nav__link--active'] : ''}
 						${styles['nav__link']}
 						${section.additionalClasses}
 						hoverable
@@ -10,6 +11,7 @@ export default function NavLink({ section }) {
 
 	const animatedScrollToSection = () => {
 		section.ref.current.scrollIntoView({ behavior: 'smooth' });
+		onClick();
 	};
 
 	return (
@@ -18,7 +20,7 @@ export default function NavLink({ section }) {
 			className={classes}
 			onClick={animatedScrollToSection}
 		>
-			{section.urlName}
+			{section.name}
 		</h1>
 	);
 }
