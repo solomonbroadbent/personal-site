@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
@@ -32,6 +32,7 @@ export default function Home() {
 		},
 		{ urlName: 'about-me', name: 'about me', ref: useRef() },
 	];
+	const [activeSection, setActiveSection] = useState(sections[0]);
 
 	return (
 		<div id={styles.root}>
@@ -46,10 +47,22 @@ export default function Home() {
 				/>
 				<title>sol</title>
 			</Head>
-			<Nav sections={sections} />
+			<Nav
+				sections={sections}
+				activeNavLink={activeSection}
+				activeNavLinkChanged={setActiveSection}
+			/>
 			<main id={styles.main}>
 				{sections.map(section => {
-					return <Section key={section.urlName} ref={section.ref} />;
+					return (
+						<Section
+							key={section.urlName}
+							ref={section.ref}
+							shouldShow={section.urlName === activeSection.urlName}
+						>
+							😃 {section.urlName} 😃
+						</Section>
+					);
 				})}
 			</main>
 			<Footer />

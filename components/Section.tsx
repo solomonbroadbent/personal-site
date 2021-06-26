@@ -4,7 +4,11 @@ import { forwardRef, useRef } from 'react';
 
 export default forwardRef((props, ref) => {
 	return (
-		<section ref={ref} className={styles.section}>
+		<section
+			ref={ref}
+			className={styles.section}
+			style={{ display: props.shouldShow ? '' : 'none' }}
+		>
 			<article className={styles.section__item}>
 				<Image
 					src='/images/terrain-tinker/editor-screenshot.png'
@@ -14,16 +18,7 @@ export default forwardRef((props, ref) => {
 				/>
 			</article>
 			<article className={styles.section__item}>
-				blah blah blah this is what i did blah blah blah this is what i did blah
-				blah blah this is what i did blah blah blah this is what i did blah blah
-				blah this is what i did blah blah blah this is what i did blah blah blah
-				this is what i did blah blah blah this is what i did blah blah blah this
-				is what i did blah blah blah this is what i did blah blah blah this is
-				what i did blah blah blah this is what i did blah blah blah this is what
-				i did blah blah blah this is what i did blah blah blah this is what i
-				did blah blah blah this is what i did blah blah blah this is what i did
-				blah blah blah this is what i did blah blah blah this is what i did blah
-				blah blah this is what i did
+				<h1>{props.children}</h1>
 			</article>
 			<article className={styles.section__item}>
 				<ul>
