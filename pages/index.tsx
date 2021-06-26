@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
 import { useRef } from 'react';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 export default function Home() {
 	// this feels like re-inventing the wheel...
@@ -45,22 +46,7 @@ export default function Home() {
 					return <Section key={section.urlName} ref={section.ref} />;
 				})}
 			</main>
-			<footer id={styles.footer}>
-				<h1>Solomon Broadbent</h1>
-				<h2>full stack dev</h2>
-				<button
-					id={styles['email-button']}
-					className={`${styles.button} hoverable`}
-				>
-					email
-				</button>
-				<button
-					id={styles['blog-button']}
-					className={`${styles.button} hoverable`}
-				>
-					blog
-				</button>
-			</footer>
+			<Footer />
 		</div>
 	);
 }
