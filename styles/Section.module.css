@@ -1,0 +1,14 @@
+.section {
+	display: grid;
+	grid-gap: 1.25rem;
+	grid-template-columns: var(--main__job-information__grid-template-columns);
+}
+
+.section__item {
+	display: grid;
+	align-content: center;
+}
+
+.section__item li {
+	list-style-type: none;
+}

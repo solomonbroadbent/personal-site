@@ -1,8 +1,30 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import Section from '../components/Section';
+import { useRef } from 'react';
 
 export default function Home() {
+	// this feels like re-inventing the wheel...
+	// 	don't know react well enough yet to know how this should be done.
+	const sections = [
+		{
+			urlName: 'skill-set',
+			ref: useRef(),
+			additionalClasses: [styles['nav__link--extra-margin-bottom']],
+		},
+		{ urlName: 'terrain-tinker', ref: useRef() },
+		{ urlName: 'playlistsyncr', ref: useRef() },
+		{ urlName: 'chorus', ref: useRef() },
+		{ urlName: 'nicholson-consulting', ref: useRef() },
+		{
+			urlName: 'uni',
+			ref: useRef(),
+			additionalClasses: [styles['nav__link--extra-margin-top']],
+		},
+		{ urlName: 'about-me', ref: useRef() },
+	];
+
 	return (
 		<div id={styles.root}>
 			<Head>
@@ -17,73 +39,32 @@ export default function Home() {
 				<title>sol</title>
 			</Head>
 			<nav id={styles.nav}>
-				<h1
-					className={`${styles['nav__link']} ${styles['nav__link--extra-margin-bottom']} hoverable`}
-				>
-					skill set
-				</h1>
-				<h1 className={`${styles['nav__link']} ${styles['nav__link--active']}`}>
-					terrain tinker
-				</h1>
-				<h1 className={`${styles['nav__link']} hoverable`}>playlistsyn.cr</h1>
-				<h1 className={`${styles['nav__link']} hoverable`}>chorus</h1>
-				<h1 className={`${styles['nav__link']} hoverable`}>
-					nicholson consulting
-				</h1>
-				<h1
-					className={`${styles['nav__link']} ${styles['nav__link--extra-margin-top']} hoverable`}
-				>
-					uni
-				</h1>
-				<h1 className={`${styles['nav__link']} hoverable`}>about me</h1>
+				{sections.map((section) => {
+					// FIXME: additionalClasses fails if there are more than 1
+					const classes = `
+						${styles['nav__link']}
+						${section.additionalClasses}
+						hoverable
+					`;
+					const animatedScrollToSection = () => {
+						section.ref.current.scrollIntoView({ behavior: 'smooth' });
+					};
+
+					return (
+						<h1
+							key={section.urlName}
+							className={classes}
+							onClick={animatedScrollToSection}
+						>
+							{section.urlName}
+						</h1>
+					);
+				})}
 			</nav>
 			<main id={styles.main}>
-				<section className={styles['job-information']}>
-					<article className={styles['job-information__section']}>
-						<Image
-							// className={styles['jobInformation__section__image']}
-							src='/images/terrain-tinker/editor-screenshot.png'
-							alt='placeholder image'
-							width='3584'
-							height='2274'
-						/>
-					</article>
-					<article className={styles['job-information__section']}>
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-						blah blah blah this is what i did blah blah blah this is what i did
-					</article>
-					<article className={styles['job-information__section']}>
-						<ul>
-							<li>vue.js</li>
-							<li>three.js</li>
-							<li>cyrpess</li>
-							<li>laravel</li>
-							<li>rabbit-mq</li>
-							<li>redis</li>
-							<li>mysql</li>
-							<li>docker</li>
-							<li>linux</li>
-						</ul>
-					</article>
-					<article className={styles['job-information__section']}>
-						explanations about what i did using vue etc explanations about what
-						i did using vue etc explanations about what i did using vue etc
-						explanations about what i did using vue etc explanations about what
-						i did using vue etc explanations about what i did using vue etc
-						explanations about what i did using vue etc explanations about what
-						i did using vue etc explanations about what i did using vue etc
-						explanations about what i did using vue etc explanations about what
-						i did using vue etc explanations about what i did using vue etc
-					</article>
-				</section>
+				{sections.map((section) => {
+					return <Section key={section.urlName} ref={section.ref} />;
+				})}
 			</main>
 			<footer id={styles.footer}>
 				<h1>Solomon Broadbent</h1>
