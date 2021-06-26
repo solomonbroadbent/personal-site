@@ -29,8 +29,7 @@
 	--nav__align-items: center;
 	--nav__gap: 0.75rem;
 	--nav__extra-margin: 0;
-
-	--nav-underline__display: block;
+	--nav__border-bottom: 1px solid var(--color-text-dark);
 
 	--main__width: calc(100vw - var(--root__padding-doubled));
 	--main__max-height: auto;
@@ -75,8 +74,7 @@ button {
 		--nav__align-items: start;
 		--nav__align-self: center;
 		--nav__extra-margin: calc(var(--nav__gap) * 2);
-
-		--nav-underline__display: none;
+		--nav__border-bottom: none;
 
 		--main__width: auto;
 		--main__max-height: 100%;

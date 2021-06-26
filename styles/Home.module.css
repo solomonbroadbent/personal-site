@@ -15,18 +15,6 @@
 	padding: var(--root__padding);
 }
 
-#nav:after {
-	display: var(--nav-underline__display);
-
-	content: '';
-	position: absolute;
-	bottom: 0;
-	width: 100vw;
-
-	border-bottom: 1px solid;
-	color: var(--color-text-dark);
-}
-
 #nav {
 	grid-area: nav;
 	align-self: var(--nav__align-self);
@@ -44,6 +32,10 @@
 	flex-direction: var(--nav__flex-direction);
 	align-items: var(--nav__align-items);
 	gap: var(--nav__gap);
+
+	/* retardedly difficult to get border to span whole screen. tried :after, <hr> many other things... */
+	/* TODO: only show border when have something below */
+	border-bottom: var(--nav__border-bottom);
 }
 
 .nav__link {
