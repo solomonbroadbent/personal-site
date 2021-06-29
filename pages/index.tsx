@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
@@ -34,6 +34,24 @@ export default function Home() {
 	];
 	const [activeSection, setActiveSection] = useState(sections[0]);
 
+	const loadNextSection = () => {};
+	const loadPreviousSection = () => {};
+
+	const blahOnScroll = event => {
+		const mainScrollPosition = event.target.scrollTop + event.target.offsetTop;
+		sections
+			.filter(section => {
+				const sectionTop = section.ref.current.offsetTop;
+				const sectionBottom = section.ref.current.clientHeight + sectionTop;
+
+				return (
+					mainScrollPosition >= sectionTop &&
+					mainScrollPosition <= sectionBottom
+				);
+			})
+			.forEach(setActiveSection);
+	};
+
 	return (
 		<div id={styles.root}>
 			<Head>
@@ -47,19 +65,11 @@ export default function Home() {
 				/>
 				<title>sol</title>
 			</Head>
-			<Nav
-				sections={sections}
-				activeNavLink={activeSection}
-				activeNavLinkChanged={setActiveSection}
-			/>
-			<main id={styles.main}>
+			<Nav sections={sections} activeNavLink={activeSection} />
+			<main id={styles.main} onScroll={blahOnScroll}>
 				{sections.map(section => {
 					return (
-						<Section
-							key={section.urlName}
-							ref={section.ref}
-							shouldShow={section.urlName === activeSection.urlName}
-						>
+						<Section key={section.urlName} ref={section.ref}>
 							😃 {section.urlName} 😃
 						</Section>
 					);

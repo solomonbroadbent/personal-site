@@ -37,6 +37,8 @@
 	--main__align-self: start;
 	--main__job-information__item__min-width: 250px;
 	--main__job-information__grid-template-columns: 1fr;
+
+	--main__section__min-height: auto;
 }
 
 *, *::before, *::after {
@@ -80,6 +82,8 @@ button {
 		--main__max-height: 100%;
 		--main__overflow-y: scroll;
 		--main__align-self: center;
+
+		--main__section__min-height: calc(var(--root__height) - var(--root__padding-doubled));
 	}
 }
 

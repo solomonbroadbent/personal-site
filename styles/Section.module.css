@@ -2,6 +2,8 @@
 	display: grid;
 	grid-gap: 1.25rem;
 	grid-template-columns: var(--main__job-information__grid-template-columns);
+	/*height: calc(var(--root__height) - var(--root__padding-doubled));*/
+	min-height: var(--main__section__min-height);
 }
 
 .section__item {

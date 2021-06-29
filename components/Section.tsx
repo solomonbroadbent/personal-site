@@ -4,11 +4,7 @@ import { forwardRef, useRef } from 'react';
 
 export default forwardRef((props, ref) => {
 	return (
-		<section
-			ref={ref}
-			className={styles.section}
-			style={{ display: props.shouldShow ? '' : 'none' }}
-		>
+		<section ref={ref} className={styles.section}>
 			<article className={styles.section__item}>
 				<Image
 					src='/images/terrain-tinker/editor-screenshot.png'

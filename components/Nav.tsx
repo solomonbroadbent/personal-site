@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css';
 import NavLink from './NavLink';
 import { useState } from 'react';
 
-export default function Nav({ activeNavLink, activeNavLinkChanged, sections }) {
+export default function Nav({ activeNavLink, sections }) {
 	return (
 		<nav id={styles.nav}>
 			{sections.map(section => (
@@ -10,7 +10,6 @@ export default function Nav({ activeNavLink, activeNavLinkChanged, sections }) {
 					key={section.urlName}
 					section={section}
 					active={section.urlName === activeNavLink.urlName}
-					onClick={() => activeNavLinkChanged(section)}
 				/>
 			))}
 		</nav>
