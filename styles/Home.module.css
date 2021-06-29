@@ -1,7 +1,7 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
-	grid-column-gap: 4rem;
+	grid-column-gap: 2rem;
 	grid-template-areas: var(--root__grid-template-areas);
 	grid-auto-columns: min-content auto;
 	grid-auto-rows: var(--root__grid-auto-rows);
@@ -93,6 +93,18 @@
 	align-self: end;
 	/* keep text on one line */
 	min-width: max-content;
+
+	/* @NOTE this is a fix for a bug where:
+		- selecting the "nicholson consulting" section and then "uni" causes frittering
+		- the layout bounces weirdly when scrolling past the "nicholson consulting" section on layouts above mobile
+
+		these issues where occurring because, on above mobile layouts, the "left panel" width was always being controlled
+		by the width of the "solomon broadbent" text – until "nicholson consulting" text had the "active" styling. if
+		this happened, then "nicholson consulting" would cause the "left panel" to grow to be wider, distorting the layout.
+
+		a bit hacky but i don't really know a better way to do this atm. this bug could definitely resurface.
+	 */
+	margin-right: 2rem;
 }
 
 #footer h1 {
