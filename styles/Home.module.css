@@ -26,7 +26,12 @@
 	position: var(--nav__position);
 
 	width: var(--nav__width);
-	overflow: hidden;
+
+	overflow: scroll;
+	/* hide the scroll bar on ie and edge */
+	-ms-overflow-style: none;
+	/* hide the scrollbar on firefox */
+	scrollbar-width: none;
 
 	display: flex;
 	flex-direction: var(--nav__flex-direction);
@@ -36,6 +41,11 @@
 	/* retardedly difficult to get border to span whole screen. tried :after, <hr> many other things... */
 	/* TODO: only show border when have something below */
 	border-bottom: var(--nav__border-bottom);
+}
+
+#nav::-webkit-scrollbar {
+	/* hide the scrollbar on chrome, safari, and opera */
+	display: none;
 }
 
 .nav__link {
