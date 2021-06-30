@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
+import { Section as SectionType } from '../types/Section';
 import { useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -13,24 +14,27 @@ export default function Home() {
 			urlName: 'skill-set',
 			name: 'skill set',
 			ref: useRef(),
+			linkRef: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-bottom']],
 		},
-		{ urlName: 'terrain-tinker', name: 'terrain tinker', ref: useRef() },
-		{ urlName: 'playlistsyncr', name: 'playlistsyn.cr', ref: useRef() },
-		{ urlName: 'chorus', name: 'chorus', ref: useRef() },
+		{ urlName: 'terrain-tinker', name: 'terrain tinker', ref: useRef(), linkRef: useRef() },
+		{ urlName: 'playlistsyncr', name: 'playlistsyn.cr', ref: useRef(), linkRef: useRef() },
+		{ urlName: 'chorus', name: 'chorus', ref: useRef(), linkRef: useRef() },
 		{
 			urlName: 'nicholson-consulting',
 			name: 'nicholson consulting',
 			ref: useRef(),
+			linkRef: useRef(),
 		},
 		{
 			urlName: 'uni',
 			name: 'uni',
 			ref: useRef(),
+			linkRef: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-top']],
 		},
-		{ urlName: 'about-me', name: 'about me', ref: useRef() },
-	];
+		{ urlName: 'about-me', name: 'about me', ref: useRef(), linkRef: useRef() },
+	] as SectionType[];
 	const [activeSection, setActiveSection] = useState(sections[0]);
 
 	const changeActiveSectionOnScroll = (scrollY: number) => {
@@ -42,6 +46,8 @@ export default function Home() {
 
 		sections
 			.filter(section => {
+				if (section.ref.current === null) return;
+
 				const sectionTop = section.ref.current.offsetTop;
 				const sectionBottom = section.ref.current.clientHeight + sectionTop;
 
@@ -59,14 +65,8 @@ export default function Home() {
 			const nav = document.getElementById(styles.nav);
 			// TODO: add logging
 			if (nav === null) return;
-
-			const activeNavLink = nav
-				.getElementsByClassName(
-					'Home_nav__link--active__1vwwm',
-					// styles.nav__linkActive,
-				)
-				.item(0);
 			// TODO: add logging
+			const activeNavLink = activeSection.linkRef.current;
 			if (activeNavLink === null) return;
 
 			const halfTheRemainingClientWidth = (nav.clientWidth - activeNavLink.clientWidth) / 2;
@@ -76,14 +76,13 @@ export default function Home() {
 
 		// TODO: most probably want to debounce around here
 		window.addEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
-		// TODO: check this resize event listener is a good idea
 		window.addEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
 
 		return function cleanup() {
 			window.removeEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 			window.removeEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
 		};
-	}, []);
+	}, [activeSection]);
 
 	return (
 		<div id={styles.root}>

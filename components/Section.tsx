@@ -1,17 +1,12 @@
 import styles from '../styles/Section.module.css';
 import Image from 'next/image';
-import { forwardRef, useRef } from 'react';
+import { ForwardedRef, forwardRef, useRef } from 'react';
 
-export default forwardRef((props, ref) => {
+export default forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
 	return (
 		<section ref={ref} className={styles.section}>
 			<article className={styles.section__item}>
-				<Image
-					src='/images/terrain-tinker/editor-screenshot.png'
-					alt='placeholder image'
-					width='3584'
-					height='2274'
-				/>
+				<Image src='/images/terrain-tinker/editor-screenshot.png' alt='placeholder image' width='3584' height='2274' />
 			</article>
 			<article className={styles.section__item}>
 				<h1>{props.children}</h1>
@@ -30,14 +25,11 @@ export default forwardRef((props, ref) => {
 				</ul>
 			</article>
 			<article className={styles.section__item}>
-				explanations about what i did using vue etc explanations about what i
-				did using vue etc explanations about what i did using vue etc
-				explanations about what i did using vue etc explanations about what i
-				did using vue etc explanations about what i did using vue etc
-				explanations about what i did using vue etc explanations about what i
-				did using vue etc explanations about what i did using vue etc
-				explanations about what i did using vue etc explanations about what i
-				did using vue etc explanations about what i did using vue etc
+				explanations about what i did using vue etc explanations about what i did using vue etc explanations about what
+				i did using vue etc explanations about what i did using vue etc explanations about what i did using vue etc
+				explanations about what i did using vue etc explanations about what i did using vue etc explanations about what
+				i did using vue etc explanations about what i did using vue etc explanations about what i did using vue etc
+				explanations about what i did using vue etc explanations about what i did using vue etc
 			</article>
 		</section>
 	);
