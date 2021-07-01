@@ -51,6 +51,7 @@ export default function Home() {
 				const sectionTop = section.ref.current.offsetTop;
 				const sectionBottom = section.ref.current.clientHeight + sectionTop;
 
+				// @IDEA instead of this logic might want to do something like which section has the majority showing?
 				return amountScrolled >= sectionTop && amountScrolled <= sectionBottom;
 			})
 			.forEach(setActiveSection);
@@ -77,10 +78,15 @@ export default function Home() {
 		// TODO: most probably want to debounce around here
 		window.addEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 		window.addEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
+		// TODO: change to only listen when a nav link is clicked (or the active nav link updated)
+		//	– running the check on every click is stupid...
+		// maybe don't even need this as using poly-fill. unless animations are off might still need?
+		window.addEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 
 		return function cleanup() {
 			window.removeEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 			window.removeEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
+			window.removeEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 		};
 	}, [activeSection]);
 
