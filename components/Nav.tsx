@@ -3,21 +3,15 @@ import NavLink from './NavLink';
 import { Section } from '../types/Section';
 import { ForwardedRef, forwardRef, RefObject, useImperativeHandle, useRef } from 'react';
 
-// export default function Nav({ activeNavLink, sections }: { activeNavLink: Section; sections: Section[] }) {
-export default forwardRef((props: { activeNavLink: Section; sections: Section[] }, ref) => {
-	const navRef = useRef();
+function Nav(props: { activeNavLink: Section; sections: Section[] }, ref: ForwardedRef<HTMLElement>) {
+	const navRef = useRef() as RefObject<HTMLElement>;
 
 	useImperativeHandle(
 		ref,
 		() => ({
-			setScrollLeft: (amount: number): void => {
-				// TODO: add logging
-				// if (navRef.current === null) return;
-
-				console.log(`trying to scroll nav ${amount} to the left`);
-				console.log(`navRef ${navRef} ref ${ref}`);
-				navRef.current.scrollLeft = amount;
-			},
+			// @ts-ignore TODO: handle properly
+			setScrollLeft: (amount: number): void => (navRef.current.scrollLeft = amount),
+			// @ts-ignore TODO: handle properly
 			clientWidth: (): number => navRef.current.clientWidth,
 		}),
 		[],
@@ -25,19 +19,16 @@ export default forwardRef((props: { activeNavLink: Section; sections: Section[] 
 
 	return (
 		<nav id={styles.nav} ref={navRef}>
-			{/*{sections.map(section => (*/}
 			{props.sections.map(section => (
 				<NavLink
 					key={section.urlName}
 					section={section}
-					// active={section.urlName === activeNavLink.urlName}
 					active={section.urlName === props.activeNavLink.urlName}
 					ref={section.linkRef}
 				/>
 			))}
 		</nav>
 	);
-	// }
-});
+}
 
-// Nav = forwardRef(Nav);
+export default forwardRef(Nav);

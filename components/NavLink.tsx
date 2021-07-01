@@ -13,14 +13,12 @@ export default forwardRef((props: { active: boolean; section: Section }, ref: Fo
 					`;
 
 	const animatedScrollToSection = (): void => {
-		// TODO: add logging
-		if (props.section.ref.current === null) return;
-
 		// smooth scroll doesn't work on saf and probably edge and ie so needs to be poly-filled
 		// @NOTE might require requestAnimationFrame polyfill for some browsers according to docs
 		// @NOTE maybe better to put in _app.tsx in a useEffect?
 		smoothScroll.polyfill();
 
+		// @ts-ignore TODO: handle properly
 		props.section.ref.current.scrollIntoView({ behavior: 'smooth' });
 	};
 

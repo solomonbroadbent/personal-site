@@ -37,69 +37,52 @@ export default function Home() {
 	] as SectionType[];
 	const [activeSection, setActiveSection] = useState(sections[0]);
 	const navRef = useRef() as ForwardedRef<HTMLElement>;
-	// const nav = <Nav sections={sections} activeNavLink={activeSection} />;
-	// const nav = <Nav sections={sections} activeNavLink={activeSection} ref={navRef} />;
 
 	const changeActiveSectionOnScroll = (scrollY: number) => {
 		const mainSection = document.getElementById(styles.main);
-		// TODO: add logging
-		if (mainSection === null) return;
 
+		// @ts-ignore TODO: handle properly
 		const amountScrolled = scrollY + mainSection.offsetTop;
 
-		sections
-			.filter(section => {
-				if (section.ref.current === null) return;
+		const haveScrolledIntoSection = (section: SectionType): boolean => {
+			// @ts-ignore TODO: handle properly
+			const sectionTop = section.ref.current.offsetTop;
+			// @ts-ignore TODO: handle properly
+			const sectionBottom = section.ref.current.clientHeight + sectionTop;
 
-				const sectionTop = section.ref.current.offsetTop;
-				const sectionBottom = section.ref.current.clientHeight + sectionTop;
+			// @IDEA instead of this logic might want to do something like which section has the majority showing?
+			return amountScrolled >= sectionTop && amountScrolled <= sectionBottom;
+		};
 
-				// @IDEA instead of this logic might want to do something like which section has the majority showing?
-				return amountScrolled >= sectionTop && amountScrolled <= sectionBottom;
-			})
-			.forEach(setActiveSection);
+		// @ts-ignore TODO: handle properly
+		setActiveSection(sections.find(haveScrolledIntoSection));
 	};
 
 	// this is only for the mobile layout as the "main" section isn't overflowing in this scenario,
 	//	the window is. sadly this means it's a bit more confusing than it should be.
 	useEffect(() => {
-		const changeActiveSectionBasedOnWindowScrollY = () => {
-			changeActiveSectionOnScroll(window.scrollY);
-
-			if (navRef.current === undefined) {
-				console.log('😘 returning!');
-				return;
-			}
-
-			console.log(`😂 clientWidth ${navRef.current.clientWidth()}`);
-
-			// TODO: add logging
-			const activeNavLink = activeSection.linkRef.current;
-			if (activeNavLink === null) return;
-
-			// const halfTheRemainingClientWidth = (nav.clientWidth - activeNavLink.clientWidth) / 2;
-			const halfTheRemainingClientWidth = (navRef.current.clientWidth() - activeNavLink.clientWidth) / 2;
-
-			// nav.scrollLeft = activeNavLink.offsetLeft - halfTheRemainingClientWidth;
-			// navRef.current.scrollLeft = activeNavLink.offsetLeft - halfTheRemainingClientWidth;
-			navRef.current.setScrollLeft(activeNavLink.offsetLeft - halfTheRemainingClientWidth);
-		};
+		const changeActiveSectionBasedOnWindowScrollY = () => changeActiveSectionOnScroll(window.scrollY);
 
 		// TODO: most probably want to debounce around here
 		window.addEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 		window.addEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
-		// TODO: change to only listen when a nav link is clicked (or the active nav link updated)
-		//	– running the check on every click is stupid...
-		// maybe don't even need this as using poly-fill. unless animations are off might still need?
-		// window.addEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 
 		return function cleanup() {
 			window.removeEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 			window.removeEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
-			// window.removeEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 		};
-		// }, [activeSection, nav]);
-	}, [activeSection, navRef]);
+	}, []);
+
+	// center the active nav link if it's been changed
+	useEffect(() => {
+		const activeNavLink = activeSection.linkRef.current;
+
+		// @ts-ignore TODO: handle properly
+		const halfTheRemainingClientWidth = (navRef.current.clientWidth() - activeNavLink.clientWidth) / 2;
+
+		// @ts-ignore TODO: handle properly
+		navRef.current.setScrollLeft(activeNavLink.offsetLeft - halfTheRemainingClientWidth);
+	}, [activeSection]);
 
 	return (
 		<div id={styles.root}>
@@ -108,8 +91,8 @@ export default function Home() {
 				<meta name='viewport' content='viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1' />
 				<title>sol</title>
 			</Head>
-			{/*{nav}*/}
 			<Nav sections={sections} activeNavLink={activeSection} ref={navRef} />
+			{/* @ts-ignore TODO: handle properly */}
 			<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
 				{sections.map(section => {
 					return (
