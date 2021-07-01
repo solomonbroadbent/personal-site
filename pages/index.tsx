@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
 import { Section as SectionType } from '../types/Section';
-import { useEffect, useRef, useState } from 'react';
+import { ForwardedRef, useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
@@ -36,6 +36,9 @@ export default function Home() {
 		{ urlName: 'about-me', name: 'about me', ref: useRef(), linkRef: useRef() },
 	] as SectionType[];
 	const [activeSection, setActiveSection] = useState(sections[0]);
+	const navRef = useRef() as ForwardedRef<HTMLElement>;
+	// const nav = <Nav sections={sections} activeNavLink={activeSection} />;
+	// const nav = <Nav sections={sections} activeNavLink={activeSection} ref={navRef} />;
 
 	const changeActiveSectionOnScroll = (scrollY: number) => {
 		const mainSection = document.getElementById(styles.main);
@@ -63,16 +66,23 @@ export default function Home() {
 		const changeActiveSectionBasedOnWindowScrollY = () => {
 			changeActiveSectionOnScroll(window.scrollY);
 
-			const nav = document.getElementById(styles.nav);
-			// TODO: add logging
-			if (nav === null) return;
+			if (navRef.current === undefined) {
+				console.log('😘 returning!');
+				return;
+			}
+
+			console.log(`😂 clientWidth ${navRef.current.clientWidth()}`);
+
 			// TODO: add logging
 			const activeNavLink = activeSection.linkRef.current;
 			if (activeNavLink === null) return;
 
-			const halfTheRemainingClientWidth = (nav.clientWidth - activeNavLink.clientWidth) / 2;
+			// const halfTheRemainingClientWidth = (nav.clientWidth - activeNavLink.clientWidth) / 2;
+			const halfTheRemainingClientWidth = (navRef.current.clientWidth() - activeNavLink.clientWidth) / 2;
 
-			nav.scrollLeft = activeNavLink.offsetLeft - halfTheRemainingClientWidth;
+			// nav.scrollLeft = activeNavLink.offsetLeft - halfTheRemainingClientWidth;
+			// navRef.current.scrollLeft = activeNavLink.offsetLeft - halfTheRemainingClientWidth;
+			navRef.current.setScrollLeft(activeNavLink.offsetLeft - halfTheRemainingClientWidth);
 		};
 
 		// TODO: most probably want to debounce around here
@@ -81,14 +91,15 @@ export default function Home() {
 		// TODO: change to only listen when a nav link is clicked (or the active nav link updated)
 		//	– running the check on every click is stupid...
 		// maybe don't even need this as using poly-fill. unless animations are off might still need?
-		window.addEventListener('click', changeActiveSectionBasedOnWindowScrollY);
+		// window.addEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 
 		return function cleanup() {
 			window.removeEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 			window.removeEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
-			window.removeEventListener('click', changeActiveSectionBasedOnWindowScrollY);
+			// window.removeEventListener('click', changeActiveSectionBasedOnWindowScrollY);
 		};
-	}, [activeSection]);
+		// }, [activeSection, nav]);
+	}, [activeSection, navRef]);
 
 	return (
 		<div id={styles.root}>
@@ -97,7 +108,8 @@ export default function Home() {
 				<meta name='viewport' content='viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1' />
 				<title>sol</title>
 			</Head>
-			<Nav sections={sections} activeNavLink={activeSection} />
+			{/*{nav}*/}
+			<Nav sections={sections} activeNavLink={activeSection} ref={navRef} />
 			<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
 				{sections.map(section => {
 					return (
