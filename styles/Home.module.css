@@ -1,9 +1,10 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
+	/* column-gap replaces grid-column-gap on newer browsers i believe. might need to use instead at some point... */
 	grid-column-gap: var(--root__grid-column-gap);
 	grid-template-areas: var(--root__grid-template-areas);
-	grid-auto-columns: min-content auto;
+	grid-auto-columns: var(--root__grid-auto-columns);
 	grid-auto-rows: var(--root__grid-auto-rows);
 
 	/* this min-height is just a guess that works

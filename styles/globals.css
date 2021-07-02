@@ -20,6 +20,7 @@
 	--root__max-height: 1880px;
 	--root__grid-template-areas: 'nav' 'main' 'footer';
 	--root__grid-auto-rows: min-content auto min-content;
+	--root__grid-auto-columns: 1fr;
 	--root__grid-column-gap: 2rem;
 
 	--nav__position: sticky;
@@ -76,6 +77,7 @@ button {
 		--root__font-size: 20px;
 		--root__grid-template-areas: 'nav main' 'footer main';
 		--root__grid-auto-rows: 1fr min-content;
+		--root__grid-auto-columns: max-content 1fr;
 
 		--nav__position: static;
 		--nav__width: max-content;
