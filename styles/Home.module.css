@@ -1,7 +1,7 @@
 #root {
 	display: grid;
 	grid-row-gap: 2rem;
-	grid-column-gap: 2rem;
+	grid-column-gap: var(--root__grid-column-gap);
 	grid-template-areas: var(--root__grid-template-areas);
 	grid-auto-columns: min-content auto;
 	grid-auto-rows: var(--root__grid-auto-rows);
@@ -9,9 +9,11 @@
 	/* this min-height is just a guess that works
 		— it should really be the nav + footer height when not mobile */
 	min-height: 625px;
+	max-height: var(--root__max-height);
 	height: var(--root__height);
 
 	min-width: var(--breakpoint-narrow);
+	max-width: 1400px;
 	padding: var(--root__padding);
 }
 

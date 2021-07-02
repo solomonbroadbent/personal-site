@@ -96,6 +96,7 @@ export default function Home() {
 			<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
 				{sections.map(section => {
 					return (
+						// @ts-ignore TODO: handle properly
 						<Section key={section.urlName} ref={section.ref}>
 							😃 {section.urlName} 😃
 						</Section>

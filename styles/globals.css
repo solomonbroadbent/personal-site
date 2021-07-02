@@ -16,8 +16,11 @@
 	--root__padding: clamp(10px, 5vmin, 100px);
 	--root__padding-doubled: calc(var(--root__padding) * 2);
 	--root__height: auto;
+	/* this is just a guess at what looks good */
+	--root__max-height: 1880px;
 	--root__grid-template-areas: 'nav' 'main' 'footer';
 	--root__grid-auto-rows: min-content auto min-content;
+	--root__grid-column-gap: 2rem;
 
 	--nav__position: sticky;
 	--nav__width: max(
@@ -56,6 +59,10 @@ html {
 	font-family: var(--font-family-primary);
 	color: var(--color-text-dark);
 	border-color: var(--color-text-dark);
+
+	display: grid;
+	/* FIXME: maybe a small issue here where content won't align center, only justify */
+	place-items: center;
 }
 
 button {
@@ -83,7 +90,10 @@ button {
 		--main__overflow-y: scroll;
 		--main__align-self: center;
 
-		--main__section__min-height: calc(var(--root__height) - var(--root__padding-doubled));
+		--main__section__min-height: min(
+			calc(var(--root__height) - var(--root__padding-doubled)),
+			calc(var(--root__max-height) - var(--root__padding-doubled))
+		);
 	}
 }
 
@@ -92,5 +102,6 @@ button {
 	:root {
 		/* trying to enforce a maximum on 2 columns. not a very good solution */
 		--main__job-information__grid-template-columns: repeat(2, 1fr);
+		--root__grid-column-gap: 4rem;
 	}
 }
