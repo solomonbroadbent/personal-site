@@ -54,8 +54,7 @@ export default function Home() {
 			return amountScrolled >= sectionTop && amountScrolled <= sectionBottom;
 		};
 
-		// @ts-ignore TODO: handle properly
-		setActiveSection(sections.find(haveScrolledIntoSection));
+		setActiveSection(sections.find(haveScrolledIntoSection) ?? activeSection);
 	};
 
 	// this is only for the mobile layout as the "main" section isn't overflowing in this scenario,
