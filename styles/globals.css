@@ -70,6 +70,18 @@ button {
 	color: var(--color-text-dark);
 }
 
+/* fixes stupid next.js issue where html, body, and #__next div where only responding to #root elements
+		max-height causing weird issues with the scrollbar and such.
+		fix found here: https://gist.github.com/dmurawsky/d45f068097d181c733a53687edce1919
+*/
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+	max-height: max-content;
+}
+
 /*@media(min-width: env(--breakpoint-medium)) {*/
 @media (min-width: 768px) {
 	:root {
