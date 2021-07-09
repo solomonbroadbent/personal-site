@@ -1,36 +1,121 @@
-html {
-	--color-background: #2A3243;
-	--color-text-medium: #B8B8B8;
-	--color-text-dark: #888888;
+:root {
+	--color-background: hsl(221, 23%, 21%);
+	--color-text-light: hsl(0, 0%, 84%);
+	--color-text-medium: hsl(0, 0%, 72%);
+	--color-text-dark: hsl(0, 0%, 53%);
+	--color-text-accent: hsl(54, 48%, 52%);
 
-	font-size: 20px;
-	background-color: var(--color-background);
+	--font-family-primary: 'Open Sans', sans-serif;
+	--font-family-accent: 'Shadows Into Light', cursive;
 
-	font-family: 'Open Sans', sans-serif;
+	--breakpoint-narrow: 320px;
+	--breakpoint-medium: 768px;
+	--breakpoint-wide: 1024px;
+
+	--root__font-size: 15px;
+	--root__padding: clamp(10px, 5vmin, 100px);
+	--root__padding-doubled: calc(var(--root__padding) * 2);
+	--root__height: auto;
+	/* this is just a guess at what looks good */
+	--root__max-height: 1880px;
+	--root__grid-template-areas: 'nav' 'main' 'footer';
+	--root__grid-auto-rows: min-content auto min-content;
+	--root__grid-auto-columns: 1fr;
+	--root__grid-column-gap: 2rem;
+
+	--nav__position: sticky;
+	--nav__width: max(
+		calc(var(--breakpoint-narrow) - var(--root__padding-doubled)),
+		calc(100vw - var(--root__padding-doubled))
+	);
+	--nav__flex-direction: row;
+	--nav__align-self: start;
+	--nav__align-items: center;
+	--nav__gap: 0.75rem;
+	--nav__extra-margin: 0;
+	--nav__border-bottom: 1px solid var(--color-text-dark);
+
+	--main__width: calc(100vw - var(--root__padding-doubled));
+	--main__max-height: auto;
+	--main__overflow-y: auto;
+	--main__align-self: start;
+	--main__job-information__item__min-width: 250px;
+	--main__job-information__grid-template-columns: 1fr;
+
+	--main__section__min-height: auto;
 }
 
-@media(min-width: 400px) {
-	html {
-		font-size: 15px;
-	}
-}
-
-@media(min-width: 900px) {
-	html {
-		font-size: 12px;
-	}
-}
-
-html, body {
+*, *::before, *::after {
+	box-sizing: inherit;
 	padding: 0;
 	margin: 0;
+	font-weight: lighter;
 }
 
-* {
+html {
 	box-sizing: border-box;
+	font-size: var(--root__font-size);
+	background-color: var(--color-background);
+
+	font-family: var(--font-family-primary);
+	color: var(--color-text-dark);
+	border-color: var(--color-text-dark);
+
+	display: grid;
+	/* FIXME: maybe a small issue here where content won't align center, only justify */
+	place-items: center;
 }
 
-h1, h2, h3, h4 {
-	font-family: 'Reenie Beanie', cursive;
-	color: var(--color-text-medium);
+button {
+	color: var(--color-text-dark);
+}
+
+/* fixes stupid next.js issue where html, body, and #__next div where only responding to #root elements
+		max-height causing weird issues with the scrollbar and such.
+		fix found here: https://gist.github.com/dmurawsky/d45f068097d181c733a53687edce1919
+*/
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+	max-height: max-content;
+}
+
+/*@media(min-width: env(--breakpoint-medium)) {*/
+@media (min-width: 768px) {
+	:root {
+		--root__height: 100vh;
+		--root__font-size: 20px;
+		--root__grid-template-areas: 'nav main' 'footer main';
+		--root__grid-auto-rows: 1fr min-content;
+		--root__grid-auto-columns: max-content 1fr;
+
+		--nav__position: static;
+		--nav__width: max-content;
+		--nav__flex-direction: column;
+		--nav__align-items: start;
+		--nav__align-self: center;
+		--nav__extra-margin: calc(var(--nav__gap) * 2);
+		--nav__border-bottom: none;
+
+		--main__width: auto;
+		--main__max-height: 100%;
+		--main__overflow-y: scroll;
+		--main__align-self: center;
+
+		--main__section__min-height: min(
+			calc(var(--root__height) - var(--root__padding-doubled)),
+			calc(var(--root__max-height) - var(--root__padding-doubled))
+		);
+	}
+}
+
+/*@media(min-width: env(--breakpoint-wide)) {*/
+@media (min-width: 992px) {
+	:root {
+		/* trying to enforce a maximum on 2 columns. not a very good solution */
+		--main__job-information__grid-template-columns: repeat(2, 1fr);
+		--root__grid-column-gap: 4rem;
+	}
 }

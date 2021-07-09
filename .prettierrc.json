@@ -4,5 +4,7 @@
 	"singleQuote": true,
 	"trailingComma": "all",
 	"semi": true,
-	"embeddedLanguageFormatting": "auto"
+	"embeddedLanguageFormatting": "auto",
+	"arrowParens": "avoid",
+	"printWidth": 120
 }

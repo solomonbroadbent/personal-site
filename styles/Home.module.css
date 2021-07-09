@@ -1,0 +1,143 @@
+#root {
+	display: grid;
+	grid-row-gap: 2rem;
+	/* column-gap replaces grid-column-gap on newer browsers i believe. might need to use instead at some point... */
+	grid-column-gap: var(--root__grid-column-gap);
+	grid-template-areas: var(--root__grid-template-areas);
+	grid-auto-columns: var(--root__grid-auto-columns);
+	grid-auto-rows: var(--root__grid-auto-rows);
+
+	/* this min-height is just a guess that works
+		— it should really be the nav + footer height when not mobile */
+	min-height: 625px;
+	max-height: var(--root__max-height);
+	height: var(--root__height);
+
+	min-width: var(--breakpoint-narrow);
+	max-width: 1400px;
+	padding: var(--root__padding);
+}
+
+#nav {
+	grid-area: nav;
+	align-self: var(--nav__align-self);
+	/* always show the nav bar on mobile. really this logic should just happen when mobile.
+		needs a cleanup */
+	top: 0;
+	z-index: 1;
+	background-color: var(--color-background);
+	position: var(--nav__position);
+
+	width: var(--nav__width);
+
+	overflow: scroll;
+	/* hide the scroll bar on ie and edge */
+	-ms-overflow-style: none;
+	/* hide the scrollbar on firefox */
+	scrollbar-width: none;
+
+	display: flex;
+	flex-direction: var(--nav__flex-direction);
+	align-items: var(--nav__align-items);
+	gap: var(--nav__gap);
+
+	/* retardedly difficult to get border to span whole screen. tried :after, <hr> many other things... */
+	/* TODO: only show border when have something below */
+	border-bottom: var(--nav__border-bottom);
+}
+
+#nav::-webkit-scrollbar {
+	/* hide the scrollbar on chrome, safari, and opera */
+	display: none;
+}
+
+.nav__link {
+	font-size: 1.25rem;
+
+	/* prevents hover from triggering when not over text */
+	min-width: max-content;
+}
+
+.nav__link--active {
+	font-family: var(--font-family-accent);
+	color: var(--color-text-light);
+	font-size: 2rem;
+	text-transform: capitalize;
+}
+
+.nav__link--extra-margin-top {
+	margin-top: var(--nav__extra-margin);
+}
+
+.nav__link--extra-margin-bottom {
+	margin-bottom: var(--nav__extra-margin);
+}
+
+#main {
+	grid-area: main;
+	align-self: var(--main__align-self);
+	justify-self: center;
+	max-height: var(--main__max-height);
+	overflow-y: var(--main__overflow-y);
+}
+
+.job-information {
+	display: grid;
+	grid-gap: 1.25rem;
+	grid-template-columns: var(--main__job-information__grid-template-columns);
+}
+
+.job-information__section {
+	display: grid;
+	align-content: center;
+}
+
+.job-information__section li {
+	list-style-type: none;
+}
+
+.job-information__section__image {
+}
+
+#footer {
+	grid-area: footer;
+	--contact--font-size: 0.9rem;
+
+	align-self: end;
+	/* keep text on one line */
+	min-width: max-content;
+
+	/* @NOTE this is a fix for a bug where:
+		- selecting the "nicholson consulting" section and then "uni" causes frittering
+		- the layout bounces weirdly when scrolling past the "nicholson consulting" section on layouts above mobile
+
+		these issues where occurring because, on above mobile layouts, the "left panel" width was always being controlled
+		by the width of the "solomon broadbent" text – until "nicholson consulting" text had the "active" styling. if
+		this happened, then "nicholson consulting" would cause the "left panel" to grow to be wider, distorting the layout.
+
+		a bit hacky but i don't really know a better way to do this atm. this bug could definitely resurface.
+	 */
+	margin-right: 2rem;
+}
+
+#footer h1 {
+	font-family: var(--font-family-accent);
+	font-style: normal;
+}
+
+#footer h2 {
+	font-size: var(--contact--font-size);
+}
+
+#footer .button {
+	background-color: transparent;
+	border-style: solid;
+	border-width: 1px;
+	margin-top: var(--contact--font-size);
+	font-size: var(--contact--font-size);
+	padding: 0.1em 1.5em;
+}
+
+#footer .button:not(:last-child) {
+	margin-right: var(--contact--font-size);
+}
