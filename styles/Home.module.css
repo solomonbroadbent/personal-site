@@ -131,6 +131,7 @@
 
 #footer .button {
 	background-color: transparent;
+	border-color: initial; /* fixes issue with border color on saf and ff */
 	border-style: solid;
 	border-width: 1px;
 	margin-top: var(--contact--font-size);
