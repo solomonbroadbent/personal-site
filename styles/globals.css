@@ -1,8 +1,13 @@
 :root {
 	--color-background: hsl(221, 23%, 21%);
+	--color-background-test-1: hsl(221, 23%, 31%);
+	--color-background-test-2: hsl(221, 23%, 41%);
+	--color-background-test-3: hsl(261, 23%, 21%);
+	--color-background-test-4: hsl(261, 23%, 31%);
 	--color-text-light: hsl(0, 0%, 84%);
 	--color-text-medium: hsl(0, 0%, 72%);
 	--color-text-dark: hsl(0, 0%, 53%);
+	--color-text-darkest: hsl(0, 0%, 33%);
 	--color-text-accent: hsl(54, 48%, 52%);
 
 	--font-family-primary: 'Open Sans', sans-serif;
@@ -36,6 +41,7 @@
 	--nav__border-bottom: 1px solid var(--color-text-dark);
 
 	--main__width: calc(100vw - var(--root__padding-doubled));
+	--main__grid-row-gap: 5rem;
 	--main__max-height: auto;
 	--main__overflow-y: auto;
 	--main__align-self: start;
@@ -99,7 +105,8 @@ div#__next > div {
 		--nav__extra-margin: calc(var(--nav__gap) * 2);
 		--nav__border-bottom: none;
 
-		--main__width: auto;
+		--main__width: 50vw;
+		--main__grid-row-gap: 0px;
 		--main__max-height: 100%;
 		--main__overflow-y: scroll;
 		--main__align-self: center;

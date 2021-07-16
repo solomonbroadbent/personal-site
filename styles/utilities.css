@@ -7,3 +7,26 @@
 		cursor: pointer;
 	}
 }
+
+.hidden {
+	display: none;
+}
+
+.not-clickable {
+	cursor: not-allowed;
+}
+
+.bordered {
+	border-color: var(--color-text-darkest); /* fixes issue with border color on saf and ff */
+	border-style: solid;
+	border-width: 1px;
+}
+
+.bordered--right {
+	border-color: var(--color-text-darkest); /* fixes issue with border color on saf and ff */
+	border-style: solid;
+	border-width: 1px;
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+}

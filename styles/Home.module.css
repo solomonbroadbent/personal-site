@@ -74,11 +74,14 @@
 }
 
 #main {
+	width: var(--main__width);
 	grid-area: main;
 	align-self: var(--main__align-self);
 	justify-self: center;
 	max-height: var(--main__max-height);
 	overflow-y: var(--main__overflow-y);
+	display: grid;
+	grid-row-gap: var(--main__grid-row-gap);
 }
 
 .job-information {

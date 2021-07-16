@@ -1,22 +1,18 @@
 import styles from '../styles/Home.module.css';
 
-export default () => {
+const Footer = () => {
 	return (
 		<footer id={styles.footer}>
 			<h1>Solomon Broadbent</h1>
 			<h2>full stack dev</h2>
-			<button
-				id={styles['email-button']}
-				className={`${styles.button} hoverable`}
-			>
+			<button id={styles['email-button']} className={`${styles.button} hoverable`}>
 				email
 			</button>
-			<button
-				id={styles['blog-button']}
-				className={`${styles.button} hoverable`}
-			>
+			<button id={styles['blog-button']} className={`${styles.button} hoverable`}>
 				blog
 			</button>
 		</footer>
 	);
 };
+
+export default Footer;

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
+import SectionStackComponent from '../components/SectionStackComponent';
 import { Section as SectionType } from '../types/Section';
 import { ForwardedRef, useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
@@ -16,15 +17,90 @@ export default function Home() {
 			ref: useRef(),
 			linkRef: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-bottom']],
+			children: (
+				<SectionStackComponent
+					entries={[
+						{
+							name: 'JAM stack',
+							children: <>- React + Next.js + Mongo - Angular - Vue + Laravel + PHP + MySQL -</>,
+						},
+						{
+							name: 'API Development',
+							children: <>- Node.JS + Express + Mongo - REST API - GraphQL</>,
+						},
+						{
+							name: 'Databases',
+							children: <>- PostgreSQL - Normalization - Redis - Mongo - Firestore</>,
+						},
+						{
+							name: 'Systems Languages',
+							children: <>- Java - Python - C - C#</>,
+						},
+					]}
+				/>
+			),
 		},
-		{ urlName: 'terrain-tinker', name: 'terrain tinker', ref: useRef(), linkRef: useRef() },
-		{ urlName: 'playlistsyncr', name: 'playlistsyn.cr', ref: useRef(), linkRef: useRef() },
-		{ urlName: 'chorus', name: 'chorus', ref: useRef(), linkRef: useRef() },
+		{
+			urlName: 'terrain-tinker',
+			name: 'terrain tinker',
+			ref: useRef(),
+			linkRef: useRef(),
+			children: (
+				<SectionStackComponent
+					entries={[
+						{
+							name: 'vue.js',
+							children: <>used vue for this that and the other</>,
+						},
+						{
+							name: 'three.js',
+							children: <>bug fixing, adding features, interacting with surrounding vue app</>,
+						},
+						{
+							name: 'cypress.js',
+							children: <>used cypress to setup e2e testing for mission critical functionality</>,
+						},
+						{ name: 'redis' },
+						{ name: 'rabbit-mq' },
+						{ name: 'mysql' },
+						{ name: 'docker' },
+						{ name: 'linux' },
+					]}
+				/>
+			),
+		},
+		{
+			urlName: 'playlistsyncr',
+			name: 'playlistsyn.cr',
+			ref: useRef(),
+			linkRef: useRef(),
+			children: (
+				<SectionStackComponent
+					entries={[
+						{ name: 'React Native' },
+						{ name: 'OAuth 2' },
+						{ name: 'Spotify API' },
+						{ name: 'Youtube data API' },
+						{ name: 'UI Design' },
+					]}
+				/>
+			),
+		},
+		{
+			urlName: 'chorus',
+			name: 'chorus',
+			ref: useRef(),
+			linkRef: useRef(),
+			children: (
+				<SectionStackComponent entries={[{ name: 'Angular' }, { name: 'REST API desing' }, { name: 'docker' }]} />
+			),
+		},
 		{
 			urlName: 'nicholson-consulting',
 			name: 'nicholson consulting',
 			ref: useRef(),
 			linkRef: useRef(),
+			children: <div> nicholson consulting</div>,
 		},
 		{
 			urlName: 'uni',
@@ -32,8 +108,24 @@ export default function Home() {
 			ref: useRef(),
 			linkRef: useRef(),
 			additionalClasses: [styles['nav__link--extra-margin-top']],
+			children: (
+				<SectionStackComponent
+					entries={[
+						{ name: 'Systems Design / Architecture' },
+						{ name: 'Systems Languages' },
+						{ name: 'Machine Learning' },
+						{ name: 'Full Stack Development' },
+					]}
+				/>
+			),
 		},
-		{ urlName: 'about-me', name: 'about me', ref: useRef(), linkRef: useRef() },
+		{
+			urlName: 'about-me',
+			name: 'about me',
+			ref: useRef(),
+			linkRef: useRef(),
+			children: <div> aboutme </div>,
+		},
 	] as SectionType[];
 	const [activeSection, setActiveSection] = useState(sections[0]);
 	const navRef = useRef() as ForwardedRef<HTMLElement>;
@@ -93,14 +185,11 @@ export default function Home() {
 			<Nav sections={sections} activeNavLink={activeSection} ref={navRef} />
 			{/* @ts-ignore TODO: handle properly */}
 			<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
-				{sections.map(section => {
-					return (
-						// @ts-ignore TODO: handle properly
-						<Section key={section.urlName} ref={section.ref}>
-							😃 {section.urlName} 😃
-						</Section>
-					);
-				})}
+				{sections.map(section => (
+					<Section key={section.urlName} ref={section.ref}>
+						{section.children}
+					</Section>
+				))}
 			</main>
 			<Footer />
 		</div>

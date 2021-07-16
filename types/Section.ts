@@ -6,4 +6,5 @@ export type Section = {
 	additionalClasses: string[];
 	ref: RefObject<HTMLElement>;
 	linkRef: RefObject<HTMLHeadingElement>;
+	children: any;
 };
