@@ -16,10 +16,11 @@ const SectionStackComponent = ({ entries, initialActiveEntryName }: Props) => {
 	return (
 		<div className={styles.stack + ' bordered'}>
 			{/*// <div className={styles.stack}>*/}
-			<div className={styles['stack__entry-names'] + ' bordered--right'}>
+			<div className={styles['stack__entry-names']}>
 				{/* @ts-ignore TODO: fix typescript error */}
 				{entries.map(entry => (
 					<h3
+						key={entry.name}
 						className={
 							(entry.children ? ' hoverable ' + styles['stack__entry-names--clickable'] + ' ' : '') +
 							(activeEntryName === entry.name && entry.children
@@ -39,7 +40,9 @@ const SectionStackComponent = ({ entries, initialActiveEntryName }: Props) => {
 					.filter(entry => entry.children)
 					.map(entry => (
 						// TODO: think this needs to be in a useEffect
-						<div className={activeEntryName === entry.name ? '' : 'hidden'}>{entry.children}</div>
+						<div className={activeEntryName === entry.name ? '' : 'hidden'} key={entry.name}>
+							{entry.children}
+						</div>
 					))}
 			</div>
 		</div>

@@ -9,17 +9,16 @@
 
 .stack {
 	height: max-content;
-	display: grid;
-	grid-template-columns: max-content 1fr;
+	display: flex;
+	flex-flow: row wrap;
 
 	/*background-color: var(--color-background-test-1);*/
 	margin-bottom: 1rem;
-
 }
 
 .stack__entry-names {
 	padding: 1rem;
-	width: max-content;
+	min-width: max-content;
 	display: inline-grid;
 	grid-gap: 0.25rem;
 	align-content: center;
@@ -36,8 +35,10 @@
 }
 
 .stack__entries {
-	width: 100%;
+	/*min-width: 50px;*/
+	margin: auto;
 	padding: 1rem;
+
 	display: inline-grid;
 	place-items: center;
 }
