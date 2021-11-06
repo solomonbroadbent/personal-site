@@ -176,7 +176,7 @@ export default function Home() {
 	}, [activeSection]);
 
 	return (
-		<div id={styles.root}>
+		<div id={styles.root} className={'text-unselectable'}>
 			<Head>
 				<link href='https://fonts.googleapis.com/css2?family=Shadows+Into+Light&Open+Sans' rel='stylesheet' />
 				<meta name='viewport' content='viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1' />
