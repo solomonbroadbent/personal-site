@@ -18,10 +18,25 @@ const NavLink = (props: { active: boolean; section: Section }, ref: ForwardedRef
 		// @NOTE maybe better to put in _app.tsx in a useEffect?
 		smoothScroll.polyfill();
 
-		// @ts-ignore fixes stupid issues with smooth scrolls and that on chromium
-		const behavior = !!window.chrome ? 'instant' : 'smooth';
+		// bad...
+		const mainSection = document.getElementById(styles.main);
 		// @ts-ignore TODO: handle properly
-		props.section.ref.current.scrollIntoView({ behavior: behavior });
+		const sectionTop = props.section.ref.current.offsetTop;
+
+		// bad, but this is for when mobile layout
+		window.scrollTo({
+			top: sectionTop,
+			left: 0,
+			behavior: 'smooth',
+		});
+
+		// @ts-ignore and this is for when tablet and desktop... TODO: fix discrepancies in how layout is done
+		mainSection.scrollTo({
+			// @ts-ignore TODO: handle properly
+			top: sectionTop - mainSection.offsetTop,
+			left: 0,
+			behavior: 'smooth',
+		});
 	}, [props.section.ref.current]);
 
 	return (
