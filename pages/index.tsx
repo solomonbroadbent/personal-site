@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 import Section from '../components/Section';
 import SectionStackComponent from '../components/SectionStackComponent';
 import { Section as SectionType } from '../types/Section';
-import { ForwardedRef, useEffect, useRef, useState } from 'react';
+import { ForwardedRef, useCallback, useEffect, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
@@ -130,24 +130,40 @@ export default function Home() {
 	const [activeSection, setActiveSection] = useState(sections[0]);
 	const navRef = useRef() as ForwardedRef<HTMLElement>;
 
-	const changeActiveSectionOnScroll = (scrollY: number) => {
-		const mainSection = document.getElementById(styles.main);
+	const changeActiveSectionOnScroll = useCallback(
+		(scrollY: number) => {
+			const mainSection = document.getElementById(styles.main);
 
-		// @ts-ignore TODO: handle properly
-		const amountScrolled = scrollY + mainSection.offsetTop;
-
-		const haveScrolledIntoSection = (section: SectionType): boolean => {
 			// @ts-ignore TODO: handle properly
-			const sectionTop = section.ref.current.offsetTop;
-			// @ts-ignore TODO: handle properly
-			const sectionBottom = section.ref.current.clientHeight + sectionTop;
+			const pixelsScrolled = scrollY + mainSection.offsetTop;
+			const bottomOfVisibleScreen = scrollY + window.innerHeight;
 
-			// @IDEA instead of this logic might want to do something like which section has the majority showing?
-			return amountScrolled >= sectionTop && amountScrolled <= sectionBottom;
-		};
+			const percentageOfSectionVisible = (section: SectionType): number => {
+				// @ts-ignore TODO: handle properly
+				const sectionTop = section.ref.current.offsetTop;
+				// @ts-ignore TODO: handle properly
+				const sectionBottom = section.ref.current.clientHeight + sectionTop;
+				// @ts-ignore TODO: handle properly
+				const sectionHeight = section.ref.current.clientHeight;
 
-		setActiveSection(sections.find(haveScrolledIntoSection) ?? activeSection);
-	};
+				// @IDEA instead of this logic might want to do something like which section has the majority showing?
+				const pixelsOfSectionAboveTop = Math.min(Math.max(pixelsScrolled - sectionTop, 0), sectionHeight);
+				const pixelsOfSectionBelowBottom = Math.min(Math.max(sectionBottom - bottomOfVisibleScreen, 0), sectionHeight);
+				const pixelsOffOfScreen = pixelsOfSectionAboveTop + pixelsOfSectionBelowBottom;
+				const pixelsOnScreen = sectionHeight - pixelsOffOfScreen;
+				const visibilityRatio = pixelsOnScreen / sectionHeight;
+				return visibilityRatio * 100;
+			};
+
+			const sectionWithMostVisiblePixels = sections.reduce((currentSection, nextSection) => {
+				if (percentageOfSectionVisible(nextSection) > percentageOfSectionVisible(currentSection)) return nextSection;
+				else return currentSection;
+			}, sections[0]);
+
+			setActiveSection(sectionWithMostVisiblePixels);
+		},
+		[activeSection, setActiveSection],
+	);
 
 	// this is only for the mobile layout as the "main" section isn't overflowing in this scenario,
 	//	the window is. sadly this means it's a bit more confusing than it should be.
@@ -162,7 +178,7 @@ export default function Home() {
 			window.removeEventListener('scroll', changeActiveSectionBasedOnWindowScrollY);
 			window.removeEventListener('resize', changeActiveSectionBasedOnWindowScrollY);
 		};
-	}, []);
+	}, [changeActiveSectionOnScroll]);
 
 	// center the active nav link if it's been changed
 	useEffect(() => {
