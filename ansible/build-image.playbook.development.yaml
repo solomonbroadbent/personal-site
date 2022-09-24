@@ -1,0 +1,15 @@
+- name:
+  hosts: all
+  vars:
+    app_directory: /home/personal-site/personal-site
+    image_name: personal-site.development
+
+  become: yes
+  tasks:
+    - name: build development image
+      community.docker.docker_image:
+        name: '{{ image_name }}'
+        build:
+          path: '{{ app_directory }}'
+        source: build
+

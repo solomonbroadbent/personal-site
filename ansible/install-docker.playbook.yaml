@@ -1,0 +1,43 @@
+- name:
+  hosts: all
+  become: yes
+  tasks:
+    - name: install docker requirements
+      ansible.builtin.apt:
+        pkg:
+            - apt-transport-https
+            - ca-certificates
+            - curl
+            - software-properties-common
+        state: latest
+        update_cache: true
+
+    - name: install ansible requirements for controlling docker
+      ansible.builtin.apt:
+        pkg:
+            - python3-pip
+            - virtualenv
+            - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: add docker gpg apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: add apt docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu jammy stable
+        state: present
+
+    - name: install docker
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: install docker module for python — needed for ansible to control docker
+      pip:
+        name: docker
+
