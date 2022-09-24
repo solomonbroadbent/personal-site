@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 
+// eslint-disable-next-line react/display-name
 export default () => {
 	return (
 		<footer id={styles.footer}>

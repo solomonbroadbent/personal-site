@@ -2,7 +2,8 @@ import styles from '../styles/Section.module.css';
 import Image from 'next/image';
 import { ForwardedRef, forwardRef, useRef } from 'react';
 
-export default forwardRef((props, ref: ForwardedRef<HTMLElement>) => {
+// eslint-disable-next-line react/display-name
+export default forwardRef((props: any, ref: ForwardedRef<HTMLElement>) => {
 	return (
 		<section ref={ref} className={styles.section}>
 			<article className={styles.section__item}>

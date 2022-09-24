@@ -3,6 +3,7 @@ import { ForwardedRef, forwardRef } from 'react';
 import { Section } from '../types/Section';
 import smoothScroll from 'smoothscroll-polyfill';
 
+// eslint-disable-next-line react/display-name
 export default forwardRef((props: { active: boolean; section: Section }, ref: ForwardedRef<HTMLHeadingElement>) => {
 	// FIXME: additionalClasses fails if there are more than 1
 	const classes = `
