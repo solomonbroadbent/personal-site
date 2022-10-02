@@ -1,0 +1,38 @@
+#- name: setup locally signed ssl by mkcert
+# - import_playbook: playbook-ssl.development.yaml
+
+# - name: install docker etc
+# - import_playbook: playbook-install-docker.yaml
+
+- name: install docker
+  import_playbook: install-docker.playbook.yaml
+
+- name: build docker image
+  import_playbook: build-image.playbook.yaml
+
+- name: setup...
+  hosts: all
+  vars:
+    app_directory: /home/personal-site/personal-site
+    image_name: personal-site
+    container_name: personal-site
+
+  become: true
+  tasks: 
+    - name: create container
+      community.docker.docker_container:
+        name: '{{ container_name }}'
+        image: '{{ image_name }}'
+        
+    - name: start site
+      community.docker.docker_container:
+        name: '{{ container_name }}'
+        state: started
+        ports:
+          - "80:80"
+          - "443:443"
+
+
+
+
+

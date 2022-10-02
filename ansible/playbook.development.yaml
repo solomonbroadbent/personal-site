@@ -16,12 +16,54 @@
     app_directory: /home/personal-site/personal-site
     image_name: personal-site.development
     container_name: personal-site.development
+    volume_name: personal-site
 
+  become: yes
   tasks: 
     - name: create development container
       community.docker.docker_container:
         name: '{{ container_name }}'
         image: '{{ image_name }}'
+        mounts:
+          - source: /home/personal-site/personal-site/pages
+            target: /app/pages
+            type: bind
+
+          - source: '{{ app_directory }}/components'
+            target: /app/components
+            type: bind
+
+          - source: '{{ app_directory }}/types'
+            target: /app/types
+            type: bind
+
+          - source: '{{ app_directory }}/public'
+            target: /app/public
+            type: bind
+
+          - source: '{{ app_directory }}/styles'
+            target: /app/styles
+            type: bind
+
+          - source: '{{ app_directory }}/next.config.js'
+            target: /app/next.config.js
+            type: bind
+
+          - source: '{{ app_directory }}/next-env.d.ts'
+            target: /app/next-env.d.ts
+            type: bind
+
+          - source: '{{ app_directory }}/tsconfig.json'
+            target: /app/tsconfig.json
+            type: bind
+
+          - source: '{{ app_directory }}/package.json'
+            target: /app/package.json
+            type: bind
+
+          - source: '{{ app_directory }}/package-lock.json'
+            target: /app/package-lock.json
+            type: bind
         
     - name: start site
       community.docker.docker_container:

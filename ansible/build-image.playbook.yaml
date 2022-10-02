@@ -2,8 +2,7 @@
   hosts: all
   vars:
     app_directory: /home/personal-site/personal-site
-    image_name: personal-site.development
-    dockerfile_name: development.Dockerfile
+    image_name: personal-site
 
   become: yes
   tasks:
@@ -12,6 +11,5 @@
         name: '{{ image_name }}'
         build:
           path: '{{ app_directory }}'
-          dockerfile: '{{ dockerfile_name }}'
         source: build
 
