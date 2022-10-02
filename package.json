@@ -28,6 +28,7 @@
     "smoothscroll-polyfill": "^0.4.4"
   },
   "devDependencies": {
+    "@types/node": "18.7.21",
     "@types/react": "^18.0.21",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "create-next-app": "^12.3.1",
