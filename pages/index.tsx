@@ -74,6 +74,10 @@ export default function Home() {
 
 	// center the active nav link if it's been changed
 	useEffect(() => {
+		return;
+
+
+
 		const activeNavLink = activeSection.linkRef.current;
 
 		// @ts-ignore TODO: handle properly
@@ -90,9 +94,19 @@ export default function Home() {
 				<meta name='viewport' content='viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1' />
 				<title>sol</title>
 			</Head>
-			<Nav sections={sections} activeNavLink={activeSection} ref={navRef} />
+
+			<main id={styles.main}>
+				<div>
+					site under construction
+				</div>
+			</main>
+
+			<Footer />
+
+
+			{/*<Nav sections={sections} activeNavLink={activeSection} ref={navRef}>*/}
 			{/* @ts-ignore TODO: handle properly */}
-			<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
+			{/*<main id={styles.main} onScroll={scrollEvent => changeActiveSectionOnScroll(scrollEvent.target.scrollTop)}>
 				{sections.map(section => {
 					return (
 						// @ts-ignore TODO: handle properly
@@ -103,6 +117,7 @@ export default function Home() {
 				})}
 			</main>
 			<Footer />
+			*/}
 		</div>
 	);
 }
